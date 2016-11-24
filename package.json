@@ -1,0 +1,83 @@
+{
+    "name": "vscode-file-templates",
+    "displayName": "File Templates for VSCode",
+    "description": "This extension helps in creating file templates.",
+    "icon": "images/icon.png",
+    "version": "1.0.0",
+    "publisher": "bam",
+    "engines": {
+        "vscode": "^1.5.0"
+    },
+    "license":"MIT",
+    "categories": [
+        "Snippets",
+        "Other"
+    ],
+    "keywords":["templates","file","snippets"],
+    "activationEvents": [
+        "onCommand:template.newTemplateFromFile",
+        "onCommand:templates.newFileFromTemplate",
+        "onCommand:templates.editTemplate",
+        "onCommand:templates.newTemplate"
+    ],
+    "main": "./extension",
+    "contributes": {
+        "configuration": {
+            "type":"object",
+            "title": "Templates Configuration",
+            "properties": {
+                "templates.Author":{
+                    "type":"string",
+                    "default":"BAM",
+                    "description": "Author of the file"
+                    }
+            }
+        },
+        "commands": [{
+            "command": "templates.newTemplate",
+            "title": "New File Template",
+            "category": "Files"
+        },{
+            "command": "template.newTemplateFromFile",
+            "title":"New Template from file",
+            "category": "Files"
+        },{
+            "command": "templates.newFileFromTemplate",
+            "title":"New File from template",
+            "category": "Files"
+        },{
+            "command": "templates.editTemplate",
+            "title": "Edit File Template",
+            "category": "Files"
+        }],
+        "menus":{
+            "editor/context": [{
+                "command":"template.newTemplateFromFile",
+                "group":"templates"
+            },{
+                "command":"templates.newFileFromTemplate",
+                "group": "templates"
+            }],
+            "explorer/context": [{
+                "command":"templates.newFileFromTemplate",
+                "group": "templates"
+            },{
+                "command": "templates.newTemplate",
+                "group": "templates"
+            }]
+        },
+        "keybindings": [{
+            "command": "templates.newFileFromTemplate",
+            "key": "ctrl+n",
+            "mac": "cmd+n"
+        }]
+    },
+    "scripts": {
+        "postinstall": "node ./node_modules/vscode/bin/install"
+    },
+    "devDependencies": {
+        "vscode": "^1.0.0",
+        "eslint": "^3.6.0",
+        "@types/node": "^6.0.40"
+    }
+}
