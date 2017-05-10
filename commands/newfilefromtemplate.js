@@ -7,6 +7,7 @@ const path = require('path');
 
 const DATE_TOKEN  = '${DATE}';
 const AUTHOR_TOKEN = '${AUTHOR}';
+const FILENAME_TOKEN = /\$\{FILENAME\}/g;
 const NEW_FILE = 'Files: New File';
 const CREATE_TEMPLATE = 'Files: New File Template';
 const EDIT_TEMPLATE = 'Files: Edit File Template';
@@ -33,6 +34,7 @@ function createFile(filepath, data = '', extension = ''){
             let config = vscode.workspace.getConfiguration('templates');
             data = data.replace(AUTHOR_TOKEN, config.Author);
             data = data.replace(DATE_TOKEN, new Date().toDateString());
+            data = data.replace(FILENAME_TOKEN, filename);
 
             fs.stat(newFilePath, (err, stats) => {
                 
